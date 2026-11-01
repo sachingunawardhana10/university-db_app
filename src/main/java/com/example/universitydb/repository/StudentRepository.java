@@ -1,4 +1,20 @@
 package com.example.universitydb.repository;
 
-public class StudentRepository {
+import com.example.universitydb.model.Student;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface StudentRepository extends JpaRepository<Student, Long>{
+
+    Optional<Student> findByStudentCode(String studentCode);
+
+    List<Student> findByNameContainingIgnoreCase(String text);
+
+    List<Student> findAllByOrderByNameAsc();
+
+    boolean existsByEmail(String email);
+
+    long countByEmailEndingWith(String domain);
 }
